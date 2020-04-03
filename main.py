@@ -9,6 +9,8 @@ def read_file(file_name):
     reader = csv.DictReader(file_name)
     for r in reader:
         product_name[r["NAIMEN"]] = r["CENA_ROZN"]
+    for key in product_name:
+        print(product_name[key])
     return product_name
 
 
