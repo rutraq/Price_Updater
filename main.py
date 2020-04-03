@@ -2,14 +2,13 @@ import csv
 from selenium import webdriver
 from time import sleep
 
-product_name = []
+product_name = {}
 
 
 def read_file(file_name):
     reader = csv.DictReader(file_name)
     for r in reader:
-        print(r["NAIMEN"] + " " + r["CENA_ROZN"])
-        product_name.append(r["NAIMEN"])
+        product_name[r["NAIMEN"]] = r["CENA_ROZN"]
     return product_name
 
 
@@ -37,4 +36,5 @@ if __name__ == "__main__":
     file = "1.csv"
     with open(file) as obj:
         read_file(obj)
-    search_product("admin", "8765tgrfcd675hgtf")
+    print(product_name)
+    # search_product("admin", "8765tgrfcd675hgtf")
