@@ -2,8 +2,9 @@ import csv
 
 
 def read_file(file_name):
-    reader = csv.reader(file_name)
-    print(list(reader))
+    reader = csv.DictReader(file_name)
+    for r in reader:
+        print(r["NAIMEN"] + " " + r["CENA_ROZN"])
 
 
 if __name__ == "__main__":
