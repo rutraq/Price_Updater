@@ -22,9 +22,9 @@ def search_product(login, password):
     passw = driver.find_element_by_id("input-password")
     passw.send_keys(password)
     passw.submit()
-    sleep(4)
+    sleep(6)
     for i in product_name:
-        print(i)
+        print(i + "     " + product_name[i])
         check_product = driver.find_element_by_id("input-name")
         check_product.clear()
         check_product.send_keys(i)
@@ -32,6 +32,25 @@ def search_product(login, password):
         sleep(1)
         button_filter.click()
         sleep(1)
+        try:
+            price = driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/form/div/table/tbody/tr/td[5]")
+            if int(product_name[i]) != int(price):
+                print(product_name[i])
+                print(price.text)
+                settings = driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/form/div/table/tbody/tr/td[9]/a")
+                settings.click()
+                sleep(2)
+                info = driver.find_element_by_xpath("/html/body/div[1]/div/div[2]/div/div[2]/form/ul/li[2]/a")
+                info.click()
+                sleep(2)
+                price_product = driver.find_element_by_id("input-price")
+                price_product.clear()
+                price_product.send_keys(product_name[i])
+                sleep(2)
+                save = driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div/button")
+                save.click()
+        except:
+            sleep(1)
 
 
 if __name__ == "__main__":
@@ -39,4 +58,4 @@ if __name__ == "__main__":
     with open(file) as obj:
         read_file(obj)
     print(product_name)
-    # search_product("admin", "8765tgrfcd675hgtf")
+    search_product("admin", "8765tgrfcd675hgtf")
